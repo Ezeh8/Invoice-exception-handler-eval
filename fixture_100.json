@@ -1,0 +1,1752 @@
+{
+  "fetched_date": "2026-07-28",
+  "note": "Hand-generated 100-case fixture (Track B) \u2014 70 clean, 8 price_variance, 8 quantity_mismatch, 6 fuzzy_vendor_match, 4 validation_failure, 4 duplicate. Fuzzy/validation cases use a RESERVED, non-overlapping item pool so agent.py's item-name-based candidate search cannot pick up unintended POs. Duplicate cases reuse 4 already-accepted clean POs and must run after their originals (file order matters).",
+  "purchase_orders": [
+    {
+      "po_id": "PO-2001",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Steel Bracket",
+      "qty": 2,
+      "rate": "650"
+    },
+    {
+      "po_id": "PO-2002",
+      "vendor_name": "Redwood Components",
+      "item_name": "Office Chairs",
+      "qty": 10,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2003",
+      "vendor_name": "Timberline Hardware",
+      "item_name": "Steel Bracket",
+      "qty": 30,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2004",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Hydraulic Hose",
+      "qty": 2,
+      "rate": "45"
+    },
+    {
+      "po_id": "PO-2005",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Office Chairs",
+      "qty": 10,
+      "rate": "320"
+    },
+    {
+      "po_id": "PO-2006",
+      "vendor_name": "Granite State Parts",
+      "item_name": "Widget A",
+      "qty": 30,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2007",
+      "vendor_name": "Sable Ridge Supply",
+      "item_name": "Safety Gloves",
+      "qty": 30,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2008",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Ball Bearings",
+      "qty": 50,
+      "rate": "120"
+    },
+    {
+      "po_id": "PO-2009",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Rubber Gasket",
+      "qty": 2,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2010",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Copper Wire",
+      "qty": 20,
+      "rate": "150"
+    },
+    {
+      "po_id": "PO-2011",
+      "vendor_name": "Redwood Components",
+      "item_name": "Copper Wire",
+      "qty": 10,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2012",
+      "vendor_name": "Crescent Manufacturing",
+      "item_name": "Steel Bracket",
+      "qty": 5,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2013",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Aluminum Sheet",
+      "qty": 15,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2014",
+      "vendor_name": "Redwood Components",
+      "item_name": "LED Panel",
+      "qty": 2,
+      "rate": "650"
+    },
+    {
+      "po_id": "PO-2015",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Circuit Board",
+      "qty": 5,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2016",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Circuit Board",
+      "qty": 12,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2017",
+      "vendor_name": "Granite State Parts",
+      "item_name": "Rubber Gasket",
+      "qty": 15,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2018",
+      "vendor_name": "Pioneer Fabrication",
+      "item_name": "Shipping Pallets",
+      "qty": 5,
+      "rate": "45"
+    },
+    {
+      "po_id": "PO-2019",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Office Chairs",
+      "qty": 12,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2020",
+      "vendor_name": "Onyx Group Supply",
+      "item_name": "Office Chairs",
+      "qty": 5,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2021",
+      "vendor_name": "Redwood Components",
+      "item_name": "Ball Bearings",
+      "qty": 15,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2022",
+      "vendor_name": "Ironclad Supply",
+      "item_name": "Aluminum Sheet",
+      "qty": 10,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2023",
+      "vendor_name": "Redwood Components",
+      "item_name": "Shipping Pallets",
+      "qty": 5,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2024",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Copper Wire",
+      "qty": 30,
+      "rate": "650"
+    },
+    {
+      "po_id": "PO-2025",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Copper Wire",
+      "qty": 25,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2026",
+      "vendor_name": "Redwood Components",
+      "item_name": "Safety Gloves",
+      "qty": 30,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2027",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Aluminum Sheet",
+      "qty": 2,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2028",
+      "vendor_name": "Westfield Fabrication",
+      "item_name": "Widget A",
+      "qty": 15,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2029",
+      "vendor_name": "Redwood Components",
+      "item_name": "Steel Bracket",
+      "qty": 10,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2030",
+      "vendor_name": "Highland Trade Co",
+      "item_name": "Shipping Pallets",
+      "qty": 15,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2031",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Ball Bearings",
+      "qty": 20,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2032",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Copper Wire",
+      "qty": 12,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2033",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Shipping Pallets",
+      "qty": 30,
+      "rate": "320"
+    },
+    {
+      "po_id": "PO-2034",
+      "vendor_name": "Highland Trade Co",
+      "item_name": "Packing Tape",
+      "qty": 20,
+      "rate": "150"
+    },
+    {
+      "po_id": "PO-2035",
+      "vendor_name": "Harborview Equipment",
+      "item_name": "Ball Bearings",
+      "qty": 5,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2036",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Rubber Gasket",
+      "qty": 5,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2037",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Safety Gloves",
+      "qty": 20,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2038",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Hydraulic Hose",
+      "qty": 20,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2039",
+      "vendor_name": "Redwood Components",
+      "item_name": "Circuit Board",
+      "qty": 2,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2040",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Circuit Board",
+      "qty": 12,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2041",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Aluminum Sheet",
+      "qty": 5,
+      "rate": "120"
+    },
+    {
+      "po_id": "PO-2042",
+      "vendor_name": "Anchor Point Trading",
+      "item_name": "Copper Wire",
+      "qty": 25,
+      "rate": "45"
+    },
+    {
+      "po_id": "PO-2043",
+      "vendor_name": "Timberline Hardware",
+      "item_name": "Shipping Pallets",
+      "qty": 12,
+      "rate": "320"
+    },
+    {
+      "po_id": "PO-2044",
+      "vendor_name": "Coastal Components Inc",
+      "item_name": "Copper Wire",
+      "qty": 30,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2045",
+      "vendor_name": "Onyx Group Supply",
+      "item_name": "Safety Gloves",
+      "qty": 12,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2046",
+      "vendor_name": "Harborview Equipment",
+      "item_name": "Packing Tape",
+      "qty": 10,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2047",
+      "vendor_name": "Ironclad Supply",
+      "item_name": "LED Panel",
+      "qty": 8,
+      "rate": "320"
+    },
+    {
+      "po_id": "PO-2048",
+      "vendor_name": "Coastal Components Inc",
+      "item_name": "Circuit Board",
+      "qty": 2,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2049",
+      "vendor_name": "Crescent Manufacturing",
+      "item_name": "Ball Bearings",
+      "qty": 2,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2050",
+      "vendor_name": "Cascade Parts Ltd",
+      "item_name": "Aluminum Sheet",
+      "qty": 12,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2051",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Office Chairs",
+      "qty": 50,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2052",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Shipping Pallets",
+      "qty": 25,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2053",
+      "vendor_name": "Sterling Hardware",
+      "item_name": "Safety Gloves",
+      "qty": 25,
+      "rate": "320"
+    },
+    {
+      "po_id": "PO-2054",
+      "vendor_name": "Northgate Distributors",
+      "item_name": "Printer Paper",
+      "qty": 30,
+      "rate": "400"
+    },
+    {
+      "po_id": "PO-2055",
+      "vendor_name": "Anchor Point Trading",
+      "item_name": "Office Chairs",
+      "qty": 30,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2056",
+      "vendor_name": "Vantage Industrial",
+      "item_name": "Hydraulic Hose",
+      "qty": 15,
+      "rate": "250"
+    },
+    {
+      "po_id": "PO-2057",
+      "vendor_name": "Highland Trade Co",
+      "item_name": "Circuit Board",
+      "qty": 25,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2058",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Office Chairs",
+      "qty": 5,
+      "rate": "150"
+    },
+    {
+      "po_id": "PO-2059",
+      "vendor_name": "Widget Supply Co",
+      "item_name": "Packing Tape",
+      "qty": 30,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2060",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Office Chairs",
+      "qty": 2,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2061",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Widget A",
+      "qty": 15,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2062",
+      "vendor_name": "Harborview Equipment",
+      "item_name": "Office Chairs",
+      "qty": 12,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2063",
+      "vendor_name": "Copperline Metals",
+      "item_name": "Office Chairs",
+      "qty": 30,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2064",
+      "vendor_name": "Timberline Hardware",
+      "item_name": "Packing Tape",
+      "qty": 50,
+      "rate": "250"
+    },
+    {
+      "po_id": "PO-2065",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "LED Panel",
+      "qty": 25,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2066",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Steel Bracket",
+      "qty": 20,
+      "rate": "150"
+    },
+    {
+      "po_id": "PO-2067",
+      "vendor_name": "Anchor Point Trading",
+      "item_name": "Hydraulic Hose",
+      "qty": 25,
+      "rate": "650"
+    },
+    {
+      "po_id": "PO-2068",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Safety Gloves",
+      "qty": 5,
+      "rate": "45"
+    },
+    {
+      "po_id": "PO-2069",
+      "vendor_name": "Summit Materials Group",
+      "item_name": "Shipping Pallets",
+      "qty": 15,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2070",
+      "vendor_name": "Onyx Group Supply",
+      "item_name": "Steel Bracket",
+      "qty": 10,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2071",
+      "vendor_name": "Pioneer Fabrication",
+      "item_name": "Circuit Board",
+      "qty": 25,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2072",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Office Chairs",
+      "qty": 5,
+      "rate": "250"
+    },
+    {
+      "po_id": "PO-2073",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Widget A",
+      "qty": 30,
+      "rate": "45"
+    },
+    {
+      "po_id": "PO-2074",
+      "vendor_name": "Cascade Parts Ltd",
+      "item_name": "LED Panel",
+      "qty": 10,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2075",
+      "vendor_name": "Copperline Metals",
+      "item_name": "Ball Bearings",
+      "qty": 10,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2076",
+      "vendor_name": "Northgate Distributors",
+      "item_name": "Hydraulic Hose",
+      "qty": 2,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2077",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Ball Bearings",
+      "qty": 12,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2078",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Shipping Pallets",
+      "qty": 25,
+      "rate": "75"
+    },
+    {
+      "po_id": "PO-2079",
+      "vendor_name": "Vantage Industrial",
+      "item_name": "Office Chairs",
+      "qty": 50,
+      "rate": "45"
+    },
+    {
+      "po_id": "PO-2080",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Shipping Pallets",
+      "qty": 2,
+      "rate": "150"
+    },
+    {
+      "po_id": "PO-2081",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Ball Bearings",
+      "qty": 30,
+      "rate": "320"
+    },
+    {
+      "po_id": "PO-2082",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Circuit Board",
+      "qty": 8,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2083",
+      "vendor_name": "Granite State Parts",
+      "item_name": "Steel Bracket",
+      "qty": 10,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2084",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Packing Tape",
+      "qty": 50,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2085",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Packing Tape",
+      "qty": 20,
+      "rate": "60"
+    },
+    {
+      "po_id": "PO-2086",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Circuit Board",
+      "qty": 12,
+      "rate": "150"
+    },
+    {
+      "po_id": "PO-2087",
+      "vendor_name": "Aurelius Tech",
+      "item_name": "Conveyor Belt Section",
+      "qty": 15,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-2088",
+      "vendor_name": "Sterling Hardware",
+      "item_name": "PVC Pipe Segment",
+      "qty": 12,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-2089",
+      "vendor_name": "Northgate Distributors",
+      "item_name": "Industrial Fan Unit",
+      "qty": 8,
+      "rate": "500"
+    },
+    {
+      "po_id": "PO-2090",
+      "vendor_name": "Pioneer Fabrication",
+      "item_name": "Nylon Strap Roll",
+      "qty": 12,
+      "rate": "250"
+    },
+    {
+      "po_id": "PO-2091",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Welding Rod Box",
+      "qty": 15,
+      "rate": "800"
+    },
+    {
+      "po_id": "PO-2092",
+      "vendor_name": "Redwood Components",
+      "item_name": "Cable Tray Length",
+      "qty": 5,
+      "rate": "45"
+    }
+  ],
+  "bills": [
+    {
+      "bill_id": "BILL-3001",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Steel Bracket",
+      "qty": 2,
+      "rate": "650",
+      "linked_po_id": "PO-2001",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3002",
+      "vendor_name": "Redwood Components",
+      "item_name": "Office Chairs",
+      "qty": 10,
+      "rate": "75",
+      "linked_po_id": "PO-2002",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3003",
+      "vendor_name": "Timberline Hardware",
+      "item_name": "Steel Bracket",
+      "qty": 30,
+      "rate": "60",
+      "linked_po_id": "PO-2003",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3004",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Hydraulic Hose",
+      "qty": 2,
+      "rate": "45",
+      "linked_po_id": "PO-2004",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3005",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Office Chairs",
+      "qty": 10,
+      "rate": "320",
+      "linked_po_id": "PO-2005",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3006",
+      "vendor_name": "Granite State Parts",
+      "item_name": "Widget A",
+      "qty": 30,
+      "rate": "90",
+      "linked_po_id": "PO-2006",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3007",
+      "vendor_name": "Sable Ridge Supply",
+      "item_name": "Safety Gloves",
+      "qty": 30,
+      "rate": "200",
+      "linked_po_id": "PO-2007",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3008",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Ball Bearings",
+      "qty": 50,
+      "rate": "120",
+      "linked_po_id": "PO-2008",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3009",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Rubber Gasket",
+      "qty": 2,
+      "rate": "800",
+      "linked_po_id": "PO-2009",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3010",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Copper Wire",
+      "qty": 20,
+      "rate": "150",
+      "linked_po_id": "PO-2010",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3011",
+      "vendor_name": "Redwood Components",
+      "item_name": "Copper Wire",
+      "qty": 10,
+      "rate": "800",
+      "linked_po_id": "PO-2011",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3012",
+      "vendor_name": "Crescent Manufacturing",
+      "item_name": "Steel Bracket",
+      "qty": 5,
+      "rate": "200",
+      "linked_po_id": "PO-2012",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3013",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Aluminum Sheet",
+      "qty": 15,
+      "rate": "400",
+      "linked_po_id": "PO-2013",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3014",
+      "vendor_name": "Redwood Components",
+      "item_name": "LED Panel",
+      "qty": 2,
+      "rate": "650",
+      "linked_po_id": "PO-2014",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3015",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Circuit Board",
+      "qty": 5,
+      "rate": "200",
+      "linked_po_id": "PO-2015",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3016",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Circuit Board",
+      "qty": 12,
+      "rate": "500",
+      "linked_po_id": "PO-2016",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3017",
+      "vendor_name": "Granite State Parts",
+      "item_name": "Rubber Gasket",
+      "qty": 15,
+      "rate": "400",
+      "linked_po_id": "PO-2017",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3018",
+      "vendor_name": "Pioneer Fabrication",
+      "item_name": "Shipping Pallets",
+      "qty": 5,
+      "rate": "45",
+      "linked_po_id": "PO-2018",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3019",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Office Chairs",
+      "qty": 12,
+      "rate": "60",
+      "linked_po_id": "PO-2019",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3020",
+      "vendor_name": "Onyx Group Supply",
+      "item_name": "Office Chairs",
+      "qty": 5,
+      "rate": "200",
+      "linked_po_id": "PO-2020",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3021",
+      "vendor_name": "Redwood Components",
+      "item_name": "Ball Bearings",
+      "qty": 15,
+      "rate": "75",
+      "linked_po_id": "PO-2021",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3022",
+      "vendor_name": "Ironclad Supply",
+      "item_name": "Aluminum Sheet",
+      "qty": 10,
+      "rate": "500",
+      "linked_po_id": "PO-2022",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3023",
+      "vendor_name": "Redwood Components",
+      "item_name": "Shipping Pallets",
+      "qty": 5,
+      "rate": "400",
+      "linked_po_id": "PO-2023",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3024",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Copper Wire",
+      "qty": 30,
+      "rate": "650",
+      "linked_po_id": "PO-2024",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3025",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Copper Wire",
+      "qty": 25,
+      "rate": "200",
+      "linked_po_id": "PO-2025",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3026",
+      "vendor_name": "Redwood Components",
+      "item_name": "Safety Gloves",
+      "qty": 30,
+      "rate": "90",
+      "linked_po_id": "PO-2026",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3027",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Aluminum Sheet",
+      "qty": 2,
+      "rate": "90",
+      "linked_po_id": "PO-2027",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3028",
+      "vendor_name": "Westfield Fabrication",
+      "item_name": "Widget A",
+      "qty": 15,
+      "rate": "200",
+      "linked_po_id": "PO-2028",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3029",
+      "vendor_name": "Redwood Components",
+      "item_name": "Steel Bracket",
+      "qty": 10,
+      "rate": "400",
+      "linked_po_id": "PO-2029",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3030",
+      "vendor_name": "Highland Trade Co",
+      "item_name": "Shipping Pallets",
+      "qty": 15,
+      "rate": "90",
+      "linked_po_id": "PO-2030",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3031",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Ball Bearings",
+      "qty": 20,
+      "rate": "500",
+      "linked_po_id": "PO-2031",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3032",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Copper Wire",
+      "qty": 12,
+      "rate": "75",
+      "linked_po_id": "PO-2032",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3033",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Shipping Pallets",
+      "qty": 30,
+      "rate": "320",
+      "linked_po_id": "PO-2033",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3034",
+      "vendor_name": "Highland Trade Co",
+      "item_name": "Packing Tape",
+      "qty": 20,
+      "rate": "150",
+      "linked_po_id": "PO-2034",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3035",
+      "vendor_name": "Harborview Equipment",
+      "item_name": "Ball Bearings",
+      "qty": 5,
+      "rate": "800",
+      "linked_po_id": "PO-2035",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3036",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Rubber Gasket",
+      "qty": 5,
+      "rate": "75",
+      "linked_po_id": "PO-2036",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3037",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Safety Gloves",
+      "qty": 20,
+      "rate": "400",
+      "linked_po_id": "PO-2037",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3038",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Hydraulic Hose",
+      "qty": 20,
+      "rate": "400",
+      "linked_po_id": "PO-2038",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3039",
+      "vendor_name": "Redwood Components",
+      "item_name": "Circuit Board",
+      "qty": 2,
+      "rate": "500",
+      "linked_po_id": "PO-2039",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3040",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Circuit Board",
+      "qty": 12,
+      "rate": "800",
+      "linked_po_id": "PO-2040",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3041",
+      "vendor_name": "Everline Industrial",
+      "item_name": "Aluminum Sheet",
+      "qty": 5,
+      "rate": "120",
+      "linked_po_id": "PO-2041",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3042",
+      "vendor_name": "Anchor Point Trading",
+      "item_name": "Copper Wire",
+      "qty": 25,
+      "rate": "45",
+      "linked_po_id": "PO-2042",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3043",
+      "vendor_name": "Timberline Hardware",
+      "item_name": "Shipping Pallets",
+      "qty": 12,
+      "rate": "320",
+      "linked_po_id": "PO-2043",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3044",
+      "vendor_name": "Coastal Components Inc",
+      "item_name": "Copper Wire",
+      "qty": 30,
+      "rate": "60",
+      "linked_po_id": "PO-2044",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3045",
+      "vendor_name": "Onyx Group Supply",
+      "item_name": "Safety Gloves",
+      "qty": 12,
+      "rate": "500",
+      "linked_po_id": "PO-2045",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3046",
+      "vendor_name": "Harborview Equipment",
+      "item_name": "Packing Tape",
+      "qty": 10,
+      "rate": "75",
+      "linked_po_id": "PO-2046",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3047",
+      "vendor_name": "Ironclad Supply",
+      "item_name": "LED Panel",
+      "qty": 8,
+      "rate": "320",
+      "linked_po_id": "PO-2047",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3048",
+      "vendor_name": "Coastal Components Inc",
+      "item_name": "Circuit Board",
+      "qty": 2,
+      "rate": "400",
+      "linked_po_id": "PO-2048",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3049",
+      "vendor_name": "Crescent Manufacturing",
+      "item_name": "Ball Bearings",
+      "qty": 2,
+      "rate": "60",
+      "linked_po_id": "PO-2049",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3050",
+      "vendor_name": "Cascade Parts Ltd",
+      "item_name": "Aluminum Sheet",
+      "qty": 12,
+      "rate": "90",
+      "linked_po_id": "PO-2050",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3051",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Office Chairs",
+      "qty": 50,
+      "rate": "60",
+      "linked_po_id": "PO-2051",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3052",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Shipping Pallets",
+      "qty": 25,
+      "rate": "60",
+      "linked_po_id": "PO-2052",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3053",
+      "vendor_name": "Sterling Hardware",
+      "item_name": "Safety Gloves",
+      "qty": 25,
+      "rate": "320",
+      "linked_po_id": "PO-2053",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3054",
+      "vendor_name": "Northgate Distributors",
+      "item_name": "Printer Paper",
+      "qty": 30,
+      "rate": "400",
+      "linked_po_id": "PO-2054",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3055",
+      "vendor_name": "Anchor Point Trading",
+      "item_name": "Office Chairs",
+      "qty": 30,
+      "rate": "800",
+      "linked_po_id": "PO-2055",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3056",
+      "vendor_name": "Vantage Industrial",
+      "item_name": "Hydraulic Hose",
+      "qty": 15,
+      "rate": "250",
+      "linked_po_id": "PO-2056",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3057",
+      "vendor_name": "Highland Trade Co",
+      "item_name": "Circuit Board",
+      "qty": 25,
+      "rate": "60",
+      "linked_po_id": "PO-2057",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3058",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "Office Chairs",
+      "qty": 5,
+      "rate": "150",
+      "linked_po_id": "PO-2058",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3059",
+      "vendor_name": "Widget Supply Co",
+      "item_name": "Packing Tape",
+      "qty": 30,
+      "rate": "90",
+      "linked_po_id": "PO-2059",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3060",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Office Chairs",
+      "qty": 2,
+      "rate": "60",
+      "linked_po_id": "PO-2060",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3061",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Widget A",
+      "qty": 15,
+      "rate": "60",
+      "linked_po_id": "PO-2061",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3062",
+      "vendor_name": "Harborview Equipment",
+      "item_name": "Office Chairs",
+      "qty": 12,
+      "rate": "500",
+      "linked_po_id": "PO-2062",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3063",
+      "vendor_name": "Copperline Metals",
+      "item_name": "Office Chairs",
+      "qty": 30,
+      "rate": "75",
+      "linked_po_id": "PO-2063",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3064",
+      "vendor_name": "Timberline Hardware",
+      "item_name": "Packing Tape",
+      "qty": 50,
+      "rate": "250",
+      "linked_po_id": "PO-2064",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3065",
+      "vendor_name": "Bluepeak Logistics",
+      "item_name": "LED Panel",
+      "qty": 25,
+      "rate": "800",
+      "linked_po_id": "PO-2065",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3066",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Steel Bracket",
+      "qty": 20,
+      "rate": "150",
+      "linked_po_id": "PO-2066",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3067",
+      "vendor_name": "Anchor Point Trading",
+      "item_name": "Hydraulic Hose",
+      "qty": 25,
+      "rate": "650",
+      "linked_po_id": "PO-2067",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3068",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Safety Gloves",
+      "qty": 5,
+      "rate": "45",
+      "linked_po_id": "PO-2068",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3069",
+      "vendor_name": "Summit Materials Group",
+      "item_name": "Shipping Pallets",
+      "qty": 15,
+      "rate": "800",
+      "linked_po_id": "PO-2069",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3070",
+      "vendor_name": "Onyx Group Supply",
+      "item_name": "Steel Bracket",
+      "qty": 10,
+      "rate": "90",
+      "linked_po_id": "PO-2070",
+      "_case": "clean \u2014 exact match. Expected verdict: accept",
+      "case_type": "clean",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3071",
+      "vendor_name": "Pioneer Fabrication",
+      "item_name": "Circuit Board",
+      "qty": 25,
+      "rate": "65",
+      "linked_po_id": "PO-2071",
+      "_case": "price_variance \u2014 PO rate 75 vs Bill rate 65. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3072",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Office Chairs",
+      "qty": 5,
+      "rate": "235",
+      "linked_po_id": "PO-2072",
+      "_case": "price_variance \u2014 PO rate 250 vs Bill rate 235. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3073",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Widget A",
+      "qty": 30,
+      "rate": "55",
+      "linked_po_id": "PO-2073",
+      "_case": "price_variance \u2014 PO rate 45 vs Bill rate 55. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3074",
+      "vendor_name": "Cascade Parts Ltd",
+      "item_name": "LED Panel",
+      "qty": 10,
+      "rate": "65",
+      "linked_po_id": "PO-2074",
+      "_case": "price_variance \u2014 PO rate 75 vs Bill rate 65. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3075",
+      "vendor_name": "Copperline Metals",
+      "item_name": "Ball Bearings",
+      "qty": 10,
+      "rate": "210",
+      "linked_po_id": "PO-2075",
+      "_case": "price_variance \u2014 PO rate 200 vs Bill rate 210. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3076",
+      "vendor_name": "Northgate Distributors",
+      "item_name": "Hydraulic Hose",
+      "qty": 2,
+      "rate": "220",
+      "linked_po_id": "PO-2076",
+      "_case": "price_variance \u2014 PO rate 200 vs Bill rate 220. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3077",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Ball Bearings",
+      "qty": 12,
+      "rate": "185",
+      "linked_po_id": "PO-2077",
+      "_case": "price_variance \u2014 PO rate 200 vs Bill rate 185. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3078",
+      "vendor_name": "Foxrun Distribution",
+      "item_name": "Shipping Pallets",
+      "qty": 25,
+      "rate": "90",
+      "linked_po_id": "PO-2078",
+      "_case": "price_variance \u2014 PO rate 75 vs Bill rate 90. Expected verdict: escalate",
+      "case_type": "price_variance",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3079",
+      "vendor_name": "Vantage Industrial",
+      "item_name": "Office Chairs",
+      "qty": 48,
+      "rate": "45",
+      "linked_po_id": "PO-2079",
+      "_case": "quantity_mismatch \u2014 PO qty 50 vs Bill qty 48. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3080",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Shipping Pallets",
+      "qty": 3,
+      "rate": "150",
+      "linked_po_id": "PO-2080",
+      "_case": "quantity_mismatch \u2014 PO qty 2 vs Bill qty 3. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3081",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Ball Bearings",
+      "qty": 32,
+      "rate": "320",
+      "linked_po_id": "PO-2081",
+      "_case": "quantity_mismatch \u2014 PO qty 30 vs Bill qty 32. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3082",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Circuit Board",
+      "qty": 9,
+      "rate": "60",
+      "linked_po_id": "PO-2082",
+      "_case": "quantity_mismatch \u2014 PO qty 8 vs Bill qty 9. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3083",
+      "vendor_name": "Granite State Parts",
+      "item_name": "Steel Bracket",
+      "qty": 9,
+      "rate": "500",
+      "linked_po_id": "PO-2083",
+      "_case": "quantity_mismatch \u2014 PO qty 10 vs Bill qty 9. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3084",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Packing Tape",
+      "qty": 48,
+      "rate": "90",
+      "linked_po_id": "PO-2084",
+      "_case": "quantity_mismatch \u2014 PO qty 50 vs Bill qty 48. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3085",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Packing Tape",
+      "qty": 18,
+      "rate": "60",
+      "linked_po_id": "PO-2085",
+      "_case": "quantity_mismatch \u2014 PO qty 20 vs Bill qty 18. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3086",
+      "vendor_name": "Cobalt Systems Supply",
+      "item_name": "Circuit Board",
+      "qty": 14,
+      "rate": "150",
+      "linked_po_id": "PO-2086",
+      "_case": "quantity_mismatch \u2014 PO qty 12 vs Bill qty 14. Expected verdict: escalate",
+      "case_type": "quantity_mismatch",
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3087",
+      "vendor_name": "Aurelius Technologies Ltd",
+      "item_name": "Conveyor Belt Section",
+      "qty": 15,
+      "rate": "90",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match \u2014 'Aurelius Technologies Ltd' vs PO's 'Aurelius Tech'. Expected verdict: accept, via LLM judgment",
+      "case_type": "fuzzy_vendor_match",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3088",
+      "vendor_name": "Sterling Hardware Inc",
+      "item_name": "PVC Pipe Segment",
+      "qty": 12,
+      "rate": "200",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match \u2014 'Sterling Hardware Inc' vs PO's 'Sterling Hardware'. Expected verdict: accept, via LLM judgment",
+      "case_type": "fuzzy_vendor_match",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3089",
+      "vendor_name": "Northgate Distribution LLC",
+      "item_name": "Industrial Fan Unit",
+      "qty": 8,
+      "rate": "500",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match \u2014 'Northgate Distribution LLC' vs PO's 'Northgate Distributors'. Expected verdict: accept, via LLM judgment",
+      "case_type": "fuzzy_vendor_match",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3090",
+      "vendor_name": "Pioneer Fab Co",
+      "item_name": "Nylon Strap Roll",
+      "qty": 12,
+      "rate": "250",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match \u2014 'Pioneer Fab Co' vs PO's 'Pioneer Fabrication'. Expected verdict: accept, via LLM judgment",
+      "case_type": "fuzzy_vendor_match",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3091",
+      "vendor_name": "Blue Peak Logistics Ltd",
+      "item_name": "Welding Rod Box",
+      "qty": 15,
+      "rate": "800",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match \u2014 'Blue Peak Logistics Ltd' vs PO's 'Bluepeak Logistics'. Expected verdict: accept, via LLM judgment",
+      "case_type": "fuzzy_vendor_match",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3092",
+      "vendor_name": "Redwood Component Group",
+      "item_name": "Cable Tray Length",
+      "qty": 5,
+      "rate": "45",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match \u2014 'Redwood Component Group' vs PO's 'Redwood Components'. Expected verdict: accept, via LLM judgment",
+      "case_type": "fuzzy_vendor_match",
+      "expected_verdict": "accept"
+    },
+    {
+      "bill_id": "BILL-3093",
+      "vendor_name": "Unknown Vendor 569",
+      "item_name": "Titanium Fastener Set",
+      "qty": 50,
+      "rate": "400",
+      "linked_po_id": null,
+      "_case": "validation_failure \u2014 no matching PO exists. Expected verdict: reject",
+      "case_type": "validation_failure",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3094",
+      "vendor_name": "Unknown Vendor 202",
+      "item_name": "Ceramic Insulator",
+      "qty": 5,
+      "rate": "320",
+      "linked_po_id": null,
+      "_case": "validation_failure \u2014 no matching PO exists. Expected verdict: reject",
+      "case_type": "validation_failure",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3095",
+      "vendor_name": "Unknown Vendor 318",
+      "item_name": "Vacuum Seal Kit",
+      "qty": 30,
+      "rate": "120",
+      "linked_po_id": null,
+      "_case": "validation_failure \u2014 no matching PO exists. Expected verdict: reject",
+      "case_type": "validation_failure",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3096",
+      "vendor_name": "Unknown Vendor 235",
+      "item_name": "Thermal Gasket Pack",
+      "qty": 15,
+      "rate": "60",
+      "linked_po_id": null,
+      "_case": "validation_failure \u2014 no matching PO exists. Expected verdict: reject",
+      "case_type": "validation_failure",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3097",
+      "vendor_name": "Falcon Ridge Wholesale",
+      "item_name": "Copper Wire",
+      "qty": 12,
+      "rate": "75",
+      "linked_po_id": "PO-2032",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2032. Must run AFTER the clean original. Expected verdict: reject",
+      "case_type": "duplicate",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3098",
+      "vendor_name": "Coastal Components Inc",
+      "item_name": "Circuit Board",
+      "qty": 2,
+      "rate": "400",
+      "linked_po_id": "PO-2048",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2048. Must run AFTER the clean original. Expected verdict: reject",
+      "case_type": "duplicate",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3099",
+      "vendor_name": "Brightpath Materials",
+      "item_name": "Safety Gloves",
+      "qty": 20,
+      "rate": "400",
+      "linked_po_id": "PO-2037",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2037. Must run AFTER the clean original. Expected verdict: reject",
+      "case_type": "duplicate",
+      "expected_verdict": "reject"
+    },
+    {
+      "bill_id": "BILL-3100",
+      "vendor_name": "Redwood Components",
+      "item_name": "Ball Bearings",
+      "qty": 15,
+      "rate": "75",
+      "linked_po_id": "PO-2021",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2021. Must run AFTER the clean original. Expected verdict: reject",
+      "case_type": "duplicate",
+      "expected_verdict": "reject"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.env
+google_credentials.json
+venv/
+__pycache__/
+*.pyc
+output.txt
+{output_file}
+escalation_log/

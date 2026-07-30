@@ -1,0 +1,74 @@
+[
+  {
+    "po_vendor": "Aurelius Tech",
+    "bill_vendor": "Aurelius Technologies Ltd",
+    "ollama_answer": "no",
+    "ollama_latency_s": 7.37,
+    "ollama_cost": 0.0,
+    "haiku_answer": "yes",
+    "haiku_latency_s": 4.04,
+    "haiku_input_tokens": 59,
+    "haiku_output_tokens": 4,
+    "haiku_cost": 7.9e-05
+  },
+  {
+    "po_vendor": "Sterling Hardware",
+    "bill_vendor": "Sterling Hardware Inc",
+    "ollama_answer": "no",
+    "ollama_latency_s": 0.64,
+    "ollama_cost": 0.0,
+    "haiku_answer": "yes",
+    "haiku_latency_s": 1.48,
+    "haiku_input_tokens": 55,
+    "haiku_output_tokens": 4,
+    "haiku_cost": 7.5e-05
+  },
+  {
+    "po_vendor": "Northgate Distributors",
+    "bill_vendor": "Northgate Distribution LLC",
+    "ollama_answer": "no",
+    "ollama_latency_s": 0.53,
+    "ollama_cost": 0.0,
+    "haiku_answer": "yes",
+    "haiku_latency_s": 1.59,
+    "haiku_input_tokens": 61,
+    "haiku_output_tokens": 4,
+    "haiku_cost": 8.1e-05
+  },
+  {
+    "po_vendor": "Pioneer Fabrication",
+    "bill_vendor": "Pioneer Fab Co",
+    "ollama_answer": "yes",
+    "ollama_latency_s": 0.64,
+    "ollama_cost": 0.0,
+    "haiku_answer": "yes",
+    "haiku_latency_s": 1.55,
+    "haiku_input_tokens": 58,
+    "haiku_output_tokens": 4,
+    "haiku_cost": 7.8e-05
+  },
+  {
+    "po_vendor": "Bluepeak Logistics",
+    "bill_vendor": "Blue Peak Logistics Ltd",
+    "ollama_answer": "no",
+    "ollama_latency_s": 0.51,
+    "ollama_cost": 0.0,
+    "haiku_answer": "yes",
+    "haiku_latency_s": 1.13,
+    "haiku_input_tokens": 60,
+    "haiku_output_tokens": 4,
+    "haiku_cost": 8e-05
+  },
+  {
+    "po_vendor": "Redwood Components",
+    "bill_vendor": "Redwood Component Group",
+    "ollama_answer": "no",
+    "ollama_latency_s": 0.56,
+    "ollama_cost": 0.0,
+    "haiku_answer": "yes",
+    "haiku_latency_s": 1.17,
+    "haiku_input_tokens": 59,
+    "haiku_output_tokens": 4,
+    "haiku_cost": 7.9e-05
+  }
+]

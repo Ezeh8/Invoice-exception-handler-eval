@@ -1,0 +1,106 @@
+{
+  "fetched_date": "2026-07-28",
+  "note": "Hand-written fixture, NOT pulled from QuickBooks — temporary stand-in while sandbox OAuth is blocked (Track B). Matches the exact flat shape map_po/map_bill produce. Swap for a real fetch_and_freeze() output once QBO access is restored — no code changes needed, agent.py only cares about this shape.",
+  "purchase_orders": [
+    {
+      "po_id": "PO-1001",
+      "vendor_name": "Widget Supply Co",
+      "item_name": "Widget A",
+      "qty": 10,
+      "rate": "650"
+    },
+    {
+      "po_id": "PO-1002",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Steel Bracket",
+      "qty": 5,
+      "rate": "200"
+    },
+    {
+      "po_id": "PO-1003",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Copper Wire",
+      "qty": 20,
+      "rate": "15"
+    },
+    {
+      "po_id": "PO-1004",
+      "vendor_name": "Aurelius Tech",
+      "item_name": "Office Chairs",
+      "qty": 8,
+      "rate": "90"
+    },
+    {
+      "po_id": "PO-1005",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Printer Paper",
+      "qty": 50,
+      "rate": "4"
+    }
+  ],
+  "bills": [
+    {
+      "bill_id": "BILL-2001",
+      "vendor_name": "Widget Supply Co",
+      "item_name": "Widget A",
+      "qty": 10,
+      "rate": "650",
+      "linked_po_id": "PO-1001",
+      "_case": "clean — exact match on vendor, qty, rate. Expected verdict: accept"
+    },
+    {
+      "bill_id": "BILL-2002",
+      "vendor_name": "ABC Parts Co",
+      "item_name": "Steel Bracket",
+      "qty": 5,
+      "rate": "220",
+      "linked_po_id": "PO-1002",
+      "_case": "price_variance — PO rate 200 vs Bill rate 220. Expected verdict: escalate"
+    },
+    {
+      "bill_id": "BILL-2003",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Copper Wire",
+      "qty": 20,
+      "rate": "15",
+      "linked_po_id": "PO-1003",
+      "_case": "duplicate (original) — must be processed FIRST, per D6 serial ordering. Expected verdict: accept"
+    },
+    {
+      "bill_id": "BILL-2004",
+      "vendor_name": "XYZ Materials",
+      "item_name": "Copper Wire",
+      "qty": 20,
+      "rate": "15",
+      "linked_po_id": "PO-1003",
+      "_case": "duplicate (repeat) — same PO as BILL-2003, must run SECOND. Expected verdict: reject or escalate (duplicate of already-processed PO)"
+    },
+    {
+      "bill_id": "BILL-2005",
+      "vendor_name": "Aurelius Technologies Ltd",
+      "item_name": "Office Chairs",
+      "qty": 8,
+      "rate": "90",
+      "linked_po_id": null,
+      "_case": "fuzzy_vendor_match — 'Aurelius Technologies Ltd' vs PO's 'Aurelius Tech', no LinkedTxn (QBO doesn't auto-link, per D1c). Expected verdict: accept, via the one LLM-judgment path"
+    },
+    {
+      "bill_id": "BILL-2006",
+      "vendor_name": "Global Supplies Inc",
+      "item_name": "Printer Paper",
+      "qty": 45,
+      "rate": "4",
+      "linked_po_id": "PO-1005",
+      "_case": "quantity_mismatch — PO qty 50 vs Bill qty 45. Expected verdict: escalate"
+    },
+    {
+      "bill_id": "BILL-2007",
+      "vendor_name": "Unknown Vendor Co",
+      "item_name": "Mystery Item",
+      "qty": 3,
+      "rate": "100",
+      "linked_po_id": null,
+      "_case": "validation_failure — no matching PO exists at all, no vendor match possible. Expected verdict: reject"
+    }
+  ]
+}
