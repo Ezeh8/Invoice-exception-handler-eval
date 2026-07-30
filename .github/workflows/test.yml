@@ -1,0 +1,78 @@
+name: Regression Suite
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:   # enables the manual "Run workflow" button on GitHub
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ieh
+          POSTGRES_PASSWORD: iwontchangeyou
+          POSTGRES_DB: ieh
+        ports:
+          - 5434:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Fails fast, before Postgres or any test runs, if either fixture
+      # file is malformed JSON.
+      - name: Validate fixture JSON
+        run: |
+          python3 -c "import json; json.load(open('demofixture1.json')); print('demofixture1.json OK')"
+          python3 -c "import json; json.load(open('fixture_100.json')); print('fixture_100.json OK')"
+
+      - name: Create processed_bills table
+        run: |
+          PGPASSWORD=iwontchangeyou psql -h localhost -p 5434 -U ieh -d ieh -c \
+          "CREATE TABLE IF NOT EXISTS processed_bills (bill_id TEXT PRIMARY KEY, po_id TEXT NOT NULL, processed_at TIMESTAMPTZ NOT NULL DEFAULT now());"
+
+      - name: Run golden dataset suite (6 cases)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pytest test_agent.py -v
+
+      - name: Run regression suite (100 cases)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: pytest test_agent_100.py -v
+
+      # --- Everything below only runs on a MANUAL trigger (the "Run
+      # workflow" button on GitHub), never on an ordinary push — so routine
+      # commits don't spam the real Slack channel / Sheet with test data.
+      # Kept in the SAME job as the tests above (not a separate job) so the
+      # escalation_log/ files the tests just wrote are still on disk here —
+      # a separate job would run on a different machine and lose them. ---
+
+      - name: Write Google credentials from secret
+        if: github.event_name == 'workflow_dispatch'
+        run: echo '${{ secrets.GOOGLE_CREDENTIALS_JSON_B64 }}' | base64 --decode > google_credentials.json
+
+      - name: Send escalation report to Slack + Sheets
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: python3 send_escalation_report.py
