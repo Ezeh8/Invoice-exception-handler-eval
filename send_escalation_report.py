@@ -15,7 +15,6 @@ Run with: python3 send_escalation_report.py
 import glob
 import json
 import os
-from datetime import datetime, timezone
 
 import gspread
 import requests
@@ -29,6 +28,9 @@ GOOGLE_SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
 CREDS_FILE = "google_credentials.json"
 
 
+STATE_FILE = ".last_sent_run_marker"
+
+
 def get_latest_run_entries():
     log_files = sorted(glob.glob("escalation_log/*.jsonl"))
     if not log_files:
@@ -38,11 +40,33 @@ def get_latest_run_entries():
         lines = [json.loads(line) for line in f if line.strip()]
 
     last_run_start = 0
+    run_marker_id = None
     for i, entry in enumerate(lines):
         if entry.get("run_marker"):
             last_run_start = i
+            run_marker_id = entry["timestamp"]  # unique per run — identifies THIS run
 
-    return [e for e in lines[last_run_start:] if not e.get("run_marker")]
+    entries = [e for e in lines[last_run_start:] if not e.get("run_marker")]
+
+    # Fallback identifier for logs with no run_marker at all (older format) —
+    # use the first entry's timestamp instead, so dedup still works.
+    if run_marker_id is None and entries:
+        run_marker_id = entries[0]["timestamp"]
+
+    return entries, run_marker_id
+
+
+def already_sent(run_marker_id: str) -> bool:
+    if not run_marker_id or not os.path.exists(STATE_FILE):
+        return False
+    with open(STATE_FILE) as f:
+        return f.read().strip() == run_marker_id
+
+
+def mark_as_sent(run_marker_id: str) -> None:
+    if run_marker_id:
+        with open(STATE_FILE, "w") as f:
+            f.write(run_marker_id)
 
 
 def write_to_sheet(entries):
@@ -87,13 +111,18 @@ def post_to_slack(entry_count: int, sheet_url: str):
 
 
 def main():
-    entries = get_latest_run_entries()
+    entries, run_marker_id = get_latest_run_entries()
     if not entries:
         print("No escalations in the most recent run — nothing to send.")
         return
 
+    if already_sent(run_marker_id):
+        print("This run's escalations were already sent — skipping to avoid duplicate rows/messages.")
+        return
+
     sheet_url = write_to_sheet(entries)
     post_to_slack(len(entries), sheet_url)
+    mark_as_sent(run_marker_id)
     print(f"Wrote {len(entries)} rows to the sheet and posted a Slack summary.")
     print(f"Sheet: {sheet_url}")
 
