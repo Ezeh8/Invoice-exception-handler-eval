@@ -6,10 +6,17 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:   # enables the manual "Run workflow" button on GitHub
+  schedule:
+    - cron: '0 6 * * 1'   # weekly, Monday 06:00 UTC — re-runs test_agent.py
+                           # against the frozen demofixture1.json fixture only
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    # Adding `schedule` above makes the cron event fire for every job in
+    # this file by default — this guard keeps this job's original
+    # push/pull_request/workflow_dispatch-only behavior unchanged.
+    if: github.event_name != 'schedule'
 
     services:
       postgres:
@@ -76,3 +83,63 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
         run: python3 send_escalation_report.py
+
+  weekly-frozen-fixture-test:
+    # Runs ONLY on the weekly cron trigger — never on push/pull_request/
+    # workflow_dispatch, which stay exclusively on the `test` job above.
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ieh
+          POSTGRES_PASSWORD: iwontchangeyou
+          POSTGRES_DB: ieh
+        ports:
+          - 5434:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Same frozen fixture the golden-dataset suite always runs against
+      # (demofixture1.json) — fixture_100.json is untouched by this job.
+      - name: Validate fixture JSON
+        run: python3 -c "import json; json.load(open('demofixture1.json')); print('demofixture1.json OK')"
+
+      - name: Create processed_bills table
+        run: |
+          PGPASSWORD=iwontchangeyou psql -h localhost -p 5434 -U ieh -d ieh -c \
+          "CREATE TABLE IF NOT EXISTS processed_bills (bill_id TEXT PRIMARY KEY, po_id TEXT NOT NULL, processed_at TIMESTAMPTZ NOT NULL DEFAULT now());"
+
+      - name: Run golden dataset suite (6 cases) and capture output
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -o pipefail
+          mkdir -p weekly_results
+          TIMESTAMP=$(date -u +%Y%m%d-%H%M%S)
+          echo "TIMESTAMP=${TIMESTAMP}" >> "$GITHUB_ENV"
+          pytest test_agent.py -v 2>&1 | tee "weekly_results/test_agent-${TIMESTAMP}.log"
+
+      - name: Upload timestamped result artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-agent-weekly-${{ env.TIMESTAMP }}
+          path: weekly_results/test_agent-${{ env.TIMESTAMP }}.log
+          retention-days: 90

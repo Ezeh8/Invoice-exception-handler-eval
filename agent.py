@@ -205,9 +205,15 @@ def llm_vendor_names_match(name_a: str, name_b: str, model: str = "haiku") -> bo
 # Duplicate detection — needs persistent state across runs (D6).
 # Backed by ieh-postgres, a fresh container separate from Cara's.
 # ---------------------------------------------------------------------------
-def is_duplicate(po_id: str, db_conn) -> bool:
+def is_duplicate(po_id: str, bill_id: str, db_conn) -> bool:
+    """True if a DIFFERENT bill_id has already touched this PO. A
+    resubmission of the SAME bill_id (e.g. a correction after a human
+    fixes the bill) is not a duplicate."""
     with db_conn.cursor() as cur:
-        cur.execute("SELECT 1 FROM processed_bills WHERE po_id = %s", (po_id,))
+        cur.execute(
+            "SELECT 1 FROM processed_bills WHERE po_id = %s AND bill_id != %s",
+            (po_id, bill_id),
+        )
         return cur.fetchone() is not None
 
 
@@ -287,15 +293,22 @@ def match_bill_to_po(bill: Bill, purchase_orders: list[PurchaseOrder], db_conn) 
             bill_id=bill.bill_id,
         )
 
-    # --- Step 4: duplicate check — has this exact PO already been processed? ---
-    if is_duplicate(candidate_po.po_id, db_conn):
-        _log_escalation(bill, candidate_po, reason=f"Duplicate: PO {candidate_po.po_id} already has a processed Bill against it.")
+    # --- Step 4: duplicate check — has a DIFFERENT bill_id already touched
+    # this PO? A resubmission of the same bill_id (correction) is fine. ---
+    if is_duplicate(candidate_po.po_id, bill.bill_id, db_conn):
+        _log_escalation(bill, candidate_po, reason=f"Duplicate: PO {candidate_po.po_id} already has a different Bill processed against it.")
         return MatchResult(
-            verdict=Verdict.REJECT,
-            reason=f"Duplicate Bill: PO {candidate_po.po_id} was already matched to a prior Bill.",
+            verdict=Verdict.ESCALATE,
+            reason=f"Duplicate Bill: PO {candidate_po.po_id} was already touched by a different Bill.",
             po_id=candidate_po.po_id,
             bill_id=bill.bill_id,
         )
+
+    # Record this bill_id against this PO now — regardless of the verdict
+    # that follows below. An escalated Bill (e.g. price variance) still
+    # "touches" the PO, so a later, different bill_id against the same PO
+    # must be caught even if this one never reaches a clean accept.
+    mark_processed(bill.bill_id, candidate_po.po_id, db_conn)
 
     # --- Step 5: deterministic comparisons (D1a — two-way matching only) ---
     if candidate_po.qty != bill.qty:
@@ -317,7 +330,6 @@ def match_bill_to_po(bill: Bill, purchase_orders: list[PurchaseOrder], db_conn) 
         )
 
     # --- Step 6: everything matches — clean accept ---
-    mark_processed(bill.bill_id, candidate_po.po_id, db_conn)
     return MatchResult(
         verdict=Verdict.ACCEPT,
         reason="PO and Bill match on vendor, quantity, and rate.",

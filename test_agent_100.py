@@ -17,7 +17,7 @@ import json
 
 import pytest
 
-from agent import Bill, PurchaseOrder, Verdict, get_db_connection, match_bill_to_po
+from agent import Bill, PurchaseOrder, Verdict, get_db_connection, log_run_start, match_bill_to_po
 
 
 FIXTURE_PATH = "fixture_100.json"
@@ -45,7 +45,13 @@ def clean_db_once():
     test — because this suite deliberately relies on shared, ordered
     state (clean cases must be accepted before their duplicates run).
     Module-scoped, unlike the 6-case suite's per-test reset.
+
+    Also writes ONE run marker (log_run_start) so send_escalation_report.py
+    can correctly find this run's escalations — previously only
+    run_fixture_test.py wrote this marker, which is why the reporting
+    script could miss pytest-generated escalations entirely.
     """
+    log_run_start()
     db_conn = get_db_connection()
     with db_conn.cursor() as cur:
         cur.execute("TRUNCATE TABLE processed_bills")

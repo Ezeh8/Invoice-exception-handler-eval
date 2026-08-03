@@ -18,10 +18,22 @@ import json
 
 import pytest
 
-from agent import Bill, PurchaseOrder, Verdict, get_db_connection, match_bill_to_po
+from agent import Bill, PurchaseOrder, Verdict, get_db_connection, log_run_start, match_bill_to_po
 
 
 FIXTURE_PATH = "demofixture1.json"
+
+
+@pytest.fixture(scope="session", autouse=True)
+def mark_test_session():
+    """
+    Writes ONE '=== NEW RUN STARTED ===' marker at the start of the whole
+    pytest session — not per test. Without this, send_escalation_report.py
+    (which looks for the last marker to find "the current run") would
+    miss every escalation this suite writes, since previously only
+    run_fixture_test.py called log_run_start().
+    """
+    log_run_start()
 
 
 @pytest.fixture
@@ -68,7 +80,7 @@ def test_price_variance_escalates(fixture_data, purchase_orders, clean_db):
     assert result.verdict == Verdict.ESCALATE, f"Expected escalate, got {result.verdict}: {result.reason}"
 
 
-def test_duplicate_pair_second_bill_rejected(fixture_data, purchase_orders, clean_db):
+def test_duplicate_pair_second_bill_escalates(fixture_data, purchase_orders, clean_db):
     """
     Order-dependent by design (D6): the original must be processed
     before the duplicate, since duplicate detection only works if
@@ -83,8 +95,8 @@ def test_duplicate_pair_second_bill_rejected(fixture_data, purchase_orders, clea
     )
 
     duplicate_result = match_bill_to_po(duplicate, purchase_orders, clean_db)
-    assert duplicate_result.verdict == Verdict.REJECT, (
-        f"Duplicate bill should be rejected, got {duplicate_result.verdict}: {duplicate_result.reason}"
+    assert duplicate_result.verdict == Verdict.ESCALATE, (
+        f"Duplicate bill should escalate, got {duplicate_result.verdict}: {duplicate_result.reason}"
     )
 
 

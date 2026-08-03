@@ -1,6 +1,6 @@
 {
   "fetched_date": "2026-07-28",
-  "note": "Hand-generated 100-case fixture (Track B) \u2014 70 clean, 8 price_variance, 8 quantity_mismatch, 6 fuzzy_vendor_match, 4 validation_failure, 4 duplicate. Fuzzy/validation cases use a RESERVED, non-overlapping item pool so agent.py's item-name-based candidate search cannot pick up unintended POs. Duplicate cases reuse 4 already-accepted clean POs and must run after their originals (file order matters).",
+  "note": "Hand-generated 100-case fixture (Track B) \u2014 70 clean, 8 price_variance, 8 quantity_mismatch, 6 fuzzy_vendor_match, 4 validation_failure, 4 duplicate, 1 duplicate_after_escalation (101 total). Fuzzy/validation cases use a RESERVED, non-overlapping item pool so agent.py's item-name-based candidate search cannot pick up unintended POs. Duplicate cases reuse 4 already-accepted clean POs and must run after their originals (file order matters). duplicate_after_escalation reuses PO-2071 (escalated via BILL-3071's price variance, never resolved) with a different bill_id and now-clean numbers \u2014 must run after BILL-3071; exercises the mark_processed regardless-of-verdict fix.",
   "purchase_orders": [
     {
       "po_id": "PO-2001",
@@ -1711,9 +1711,9 @@
       "qty": 12,
       "rate": "75",
       "linked_po_id": "PO-2032",
-      "_case": "duplicate \u2014 repeats already-accepted PO PO-2032. Must run AFTER the clean original. Expected verdict: reject",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2032. Must run AFTER the clean original. Expected verdict: escalate",
       "case_type": "duplicate",
-      "expected_verdict": "reject"
+      "expected_verdict": "escalate"
     },
     {
       "bill_id": "BILL-3098",
@@ -1722,9 +1722,9 @@
       "qty": 2,
       "rate": "400",
       "linked_po_id": "PO-2048",
-      "_case": "duplicate \u2014 repeats already-accepted PO PO-2048. Must run AFTER the clean original. Expected verdict: reject",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2048. Must run AFTER the clean original. Expected verdict: escalate",
       "case_type": "duplicate",
-      "expected_verdict": "reject"
+      "expected_verdict": "escalate"
     },
     {
       "bill_id": "BILL-3099",
@@ -1733,9 +1733,9 @@
       "qty": 20,
       "rate": "400",
       "linked_po_id": "PO-2037",
-      "_case": "duplicate \u2014 repeats already-accepted PO PO-2037. Must run AFTER the clean original. Expected verdict: reject",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2037. Must run AFTER the clean original. Expected verdict: escalate",
       "case_type": "duplicate",
-      "expected_verdict": "reject"
+      "expected_verdict": "escalate"
     },
     {
       "bill_id": "BILL-3100",
@@ -1744,9 +1744,20 @@
       "qty": 15,
       "rate": "75",
       "linked_po_id": "PO-2021",
-      "_case": "duplicate \u2014 repeats already-accepted PO PO-2021. Must run AFTER the clean original. Expected verdict: reject",
+      "_case": "duplicate \u2014 repeats already-accepted PO PO-2021. Must run AFTER the clean original. Expected verdict: escalate",
       "case_type": "duplicate",
-      "expected_verdict": "reject"
+      "expected_verdict": "escalate"
+    },
+    {
+      "bill_id": "BILL-3101",
+      "vendor_name": "Pioneer Fabrication",
+      "item_name": "Circuit Board",
+      "qty": 25,
+      "rate": "75",
+      "linked_po_id": "PO-2071",
+      "_case": "duplicate_after_escalation \u2014 exploits the gap just fixed in mark_processed(): BILL-3071 already escalated on PO-2071 (price variance, unresolved). This is a DIFFERENT bill_id claiming the same PO with numbers that now match cleanly (qty 25, rate 75). Before the fix this wrongly accepted as first-time-clean; after the fix it must escalate, since a different bill_id already touched this PO. Must run AFTER BILL-3071.",
+      "case_type": "duplicate_after_escalation",
+      "expected_verdict": "escalate"
     }
   ]
 }
