@@ -7,3 +7,4 @@ output.txt
 {output_file}
 escalation_log/
 .last_sent_run_marker
+.DS_Store
