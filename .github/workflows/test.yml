@@ -18,6 +18,11 @@ jobs:
     # push/pull_request/workflow_dispatch-only behavior unchanged.
     if: github.event_name != 'schedule'
 
+    # Throwaway CI database, so its password is not a secret; agent.py
+    # reads it from here instead of a hardcoded fallback.
+    env:
+      IEH_DB_PASSWORD: iwontchangeyou
+
     services:
       postgres:
         image: postgres:16
@@ -92,6 +97,11 @@ jobs:
     # workflow_dispatch, which stay exclusively on the `test` job above.
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
+
+    # Throwaway CI database, so its password is not a secret; agent.py
+    # reads it from here instead of a hardcoded fallback.
+    env:
+      IEH_DB_PASSWORD: iwontchangeyou
 
     services:
       postgres:

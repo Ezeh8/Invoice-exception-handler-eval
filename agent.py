@@ -40,12 +40,18 @@ def get_db_connection():
     cara-postgres, per the locked decision to keep zero shared runtime
     dependency with Cara.
     """
+    password = os.environ.get("IEH_DB_PASSWORD")
+    if not password:
+        raise RuntimeError(
+            "IEH_DB_PASSWORD is not set. Add it to your .env file before "
+            "connecting to ieh-postgres."
+        )
     return psycopg2.connect(
         host="localhost",
         port=5434,
         dbname="ieh",
         user="ieh",
-        password=os.environ.get("IEH_DB_PASSWORD", "iwontchangeyou"),
+        password=password,
     )
 
 
