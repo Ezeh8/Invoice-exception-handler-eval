@@ -6,6 +6,8 @@ sample PurchaseOrder response) — not invented structures.
 
 This is what let me confirm the mapping logic is correct WITHOUT a live
 QuickBooks connection, which this sandbox environment can't reach.
+
+Run with: pytest test_mapping.py -v
 """
 
 from fetch_cases import map_po, map_bill
@@ -71,35 +73,24 @@ SAMPLE_BILL_NO_PO = {
     ],
 }
 
-results = []
 
-po = map_po(SAMPLE_PO)
-checks = [
-    (po["po_id"] == "257", f"po_id: expected 257, got {po['po_id']}"),
-    (po["vendor_name"] == "Aurelius Tech", f"vendor_name: got {po['vendor_name']}"),
-    (po["qty"] == 10, f"qty: got {po['qty']}"),
-    (po["rate"] == "100", f"rate: got {po['rate']}"),
-]
-for ok, msg in checks:
-    print(f"[{'PASS' if ok else 'FAIL'}] map_po: {msg}")
-    results.append(ok)
+def test_map_po_reads_documented_purchase_order_fields():
+    po = map_po(SAMPLE_PO)
+    assert po["po_id"] == "257"
+    assert po["vendor_name"] == "Aurelius Tech"
+    assert po["qty"] == 10
+    assert po["rate"] == "100"
 
-bill = map_bill(SAMPLE_BILL)
-checks = [
-    (bill["bill_id"] == "301", f"bill_id: got {bill['bill_id']}"),
-    (bill["vendor_name"] == "Aurelius Tech", f"vendor_name: got {bill['vendor_name']}"),
-    (bill["qty"] == 10, f"qty: got {bill['qty']}"),
-    (bill["rate"] == "105", f"rate: got {bill['rate']}"),
-    (bill["linked_po_id"] == "257", f"linked_po_id: got {bill['linked_po_id']}"),
-]
-for ok, msg in checks:
-    print(f"[{'PASS' if ok else 'FAIL'}] map_bill: {msg}")
-    results.append(ok)
 
-bill_no_po = map_bill(SAMPLE_BILL_NO_PO)
-ok = bill_no_po["linked_po_id"] is None
-print(f"[{'PASS' if ok else 'FAIL'}] map_bill (no PO): linked_po_id is None -> {bill_no_po['linked_po_id']}")
-results.append(ok)
+def test_map_bill_reads_top_level_linked_po():
+    bill = map_bill(SAMPLE_BILL)
+    assert bill["bill_id"] == "301"
+    assert bill["vendor_name"] == "Aurelius Tech"
+    assert bill["qty"] == 10
+    assert bill["rate"] == "105"
+    assert bill["linked_po_id"] == "257"
 
-print()
-print(f"--- {sum(results)}/{len(results)} passed ---")
+
+def test_map_bill_without_po_link_gives_none():
+    bill = map_bill(SAMPLE_BILL_NO_PO)
+    assert bill["linked_po_id"] is None

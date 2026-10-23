@@ -148,7 +148,9 @@ run_fixture_test1.py              ~ early standalone fixture runner, superseded 
 ```bash
 pip install -r requirements.txt
 docker start ieh-postgres
+# .env needs ANTHROPIC_API_KEY and IEH_DB_PASSWORD (the ieh-postgres password)
 
+pytest test_mapping.py -v
 pytest test_agent.py -v
 pytest test_agent_100.py -v
 python3 model_cost_latency_comparison.py

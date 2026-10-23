@@ -18,6 +18,11 @@ jobs:
     # push/pull_request/workflow_dispatch-only behavior unchanged.
     if: github.event_name != 'schedule'
 
+    # Throwaway CI database, so its password is not a secret; agent.py
+    # reads it from here instead of a hardcoded fallback.
+    env:
+      IEH_DB_PASSWORD: iwontchangeyou
+
     services:
       postgres:
         image: postgres:16
@@ -34,10 +39,10 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
 
@@ -50,6 +55,9 @@ jobs:
         run: |
           python3 -c "import json; json.load(open('demofixture1.json')); print('demofixture1.json OK')"
           python3 -c "import json; json.load(open('fixture_100.json')); print('fixture_100.json OK')"
+
+      - name: Run QuickBooks mapping tests
+        run: pytest test_mapping.py -v
 
       - name: Create processed_bills table
         run: |
@@ -90,6 +98,11 @@ jobs:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
 
+    # Throwaway CI database, so its password is not a secret; agent.py
+    # reads it from here instead of a hardcoded fallback.
+    env:
+      IEH_DB_PASSWORD: iwontchangeyou
+
     services:
       postgres:
         image: postgres:16
@@ -106,10 +119,10 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
 
@@ -138,7 +151,7 @@ jobs:
 
       - name: Upload timestamped result artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-agent-weekly-${{ env.TIMESTAMP }}
           path: weekly_results/test_agent-${{ env.TIMESTAMP }}.log
