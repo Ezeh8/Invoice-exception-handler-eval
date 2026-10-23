@@ -1,5 +1,5 @@
 """
-run_fixture_test.py — runs the 6 (7-record) hand-written fixture through
+run_fixture_test1.py — runs the 6 (7-record) hand-written fixture through
 agent.py's real matching logic and prints actual vs. expected verdicts.
 
 This is Track B: proves agent.py works correctly, independent of whether
@@ -52,5 +52,5 @@ def main(fixture_path: str) -> None:
 
 
 if __name__ == "__main__":
-    fixture_file = sys.argv[1] if len(sys.argv) > 1 else "fixture.json"
+    fixture_file = sys.argv[1] if len(sys.argv) > 1 else "demofixture1.json"
     main(fixture_file)
