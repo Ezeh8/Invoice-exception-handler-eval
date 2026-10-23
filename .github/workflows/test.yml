@@ -51,6 +51,9 @@ jobs:
           python3 -c "import json; json.load(open('demofixture1.json')); print('demofixture1.json OK')"
           python3 -c "import json; json.load(open('fixture_100.json')); print('fixture_100.json OK')"
 
+      - name: Run QuickBooks mapping tests
+        run: pytest test_mapping.py -v
+
       - name: Create processed_bills table
         run: |
           PGPASSWORD=iwontchangeyou psql -h localhost -p 5434 -U ieh -d ieh -c \
