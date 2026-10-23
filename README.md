@@ -16,7 +16,7 @@ Three verdicts, per Bill:
 
 ## How (Architecture)
 
-Not "an AI agent" in the sense of an LLM deciding everything. A rule engine handles the overwhelming majority of cases ~ deterministic vendor/PO matching, quantity and rate checks, Postgres-backed duplicate detection keyed on PO + bill ID (not PO alone, so a legitimate corrected resubmission of the same Bill still goes through, while a different Bill claiming an already-touched PO escalates). **One** isolated step calls an LLM (Claude Haiku): fuzzy vendor-name matching, recognizing "Aurelius Tech" and "Aurelius Technologies Ltd" as the same company when an exact match fails. Reaching for an LLM only where genuine judgment is needed ~ not by default ~ was a deliberate choice.
+Not "an AI agent" in the sense of an LLM deciding everything. A rule engine handles the overwhelming majority of cases ~ deterministic vendor/PO matching, quantity and rate checks, Postgres-backed duplicate detection keyed on PO + bill ID (not PO alone, so a legitimate corrected resubmission of the same Bill still goes through, while a different Bill claiming an already-touched PO escalates). **One** isolated step calls an LLM (Claude Haiku): fuzzy vendor-name matching, recognizing "Aurelius Tech" and "Aurelius Technologies Ltd" as the same company when an exact match fails. Names that differ only by suffixes, plurals or spacing ("Redwood Component Group" vs "Redwood Components") are settled first by normalising them, with no LLM call; if the LLM answers "unsure", the Bill escalates to a human instead of being rejected. Reaching for an LLM only where genuine judgment is needed ~ not by default ~ was a deliberate choice.
 
 The model for that one step was chosen by measurement, not assumption ~ see comparison below.
 
@@ -129,18 +129,28 @@ Haiku is the default ~ the only option that was both correct and practical. A me
 ## Project structure
 
 ```
-agent.py                          ~ core matching/decision logic
-fetch_cases.py, qbo_client.py      ~ QuickBooks integration layer (blocked, see above)
-demofixture1.json                 ~ golden dataset (6 cases)
-fixture_100.json                  ~ regression suite (107 cases)
-test_agent.py, test_agent_100.py  ~ pytest suites
-model_cost_latency_comparison.py  ~ Ollama vs. Haiku, real measured output
-send_escalation_report.py         ~ writes to Google Sheets, posts to Slack
-requirements.txt                  ~ dependencies
-.gitignore                        ~ excludes .env, credentials, venv, local state
-.github/workflows/test.yml        ~ CI: tests on every push; weekly drift check; Slack/Sheets on manual trigger only
-escalation_log/                   ~ structured log of every escalated/rejected case
-run_fixture_test1.py              ~ early standalone fixture runner, superseded by the pytest suites
+invoice_exception_handler/         ~ the app (start reading at matching.py)
+  matching.py                      ~ core matching/decision logic
+  vendor_matching.py               ~ the one LLM call: fuzzy vendor-name matching
+  models.py                        ~ PurchaseOrder, Bill, Verdict, MatchResult
+  database.py                      ~ ieh-postgres connection + duplicate detection
+  escalation_log.py                ~ structured log of every escalated/rejected case
+  fixture_loading.py, paths.py     ~ fixture loading + project folder locations
+  quickbooks/                      ~ QuickBooks client + mapping (live sandbox blocked, see above)
+scripts/
+  fetch_cases.py                   ~ pulls live QuickBooks data into a fixture
+  run_fixture.py                   ~ early standalone fixture runner, superseded by the pytest suites
+  compare_models.py                ~ Ollama vs. Haiku, real measured output
+  send_escalation_report.py        ~ writes to Google Sheets, posts to Slack
+tests/                             ~ pytest suites: QuickBooks mapping, vendor matching, golden dataset, 100-case regression
+fixtures/
+  golden_dataset.json              ~ golden dataset (6 cases)
+  regression_100.json              ~ regression suite (107 cases)
+escalation_log/                    ~ written at runtime, git-ignored
+requirements.txt                   ~ dependencies
+pytest.ini                         ~ lets tests import the app from the project root
+.gitignore                         ~ excludes .env, credentials, venv, local state
+.github/workflows/test.yml         ~ CI: tests on every push; weekly drift check; Slack/Sheets on manual trigger only
 ```
 
 ## Running it
@@ -150,11 +160,10 @@ pip install -r requirements.txt
 docker start ieh-postgres
 # .env needs ANTHROPIC_API_KEY and IEH_DB_PASSWORD (the ieh-postgres password)
 
-pytest test_mapping.py -v
-pytest test_agent.py -v
-pytest test_agent_100.py -v
-python3 model_cost_latency_comparison.py
-python3 send_escalation_report.py
+# Run everything from the project root
+pytest -v                                   # all suites
+python3 -m scripts.compare_models
+python3 -m scripts.send_escalation_report
 ```
 
 ## Known limitations

@@ -1,26 +1,15 @@
 """
-Pulls every Bill and PurchaseOrder from the sandbox, maps QuickBooks' raw
-JSON into the shapes agent.py expects, and freezes the result to a dated
-JSON fixture file.
+Maps QuickBooks' raw JSON into the flat shapes the matching engine expects.
+Pure functions, no network calls — so they can be tested against sample
+JSON without ever calling the live API (see tests/test_quickbooks_mapping.py).
 
-The MAPPING functions are separated from the FETCHING so they can be
-tested against sample JSON without ever calling the live API (see
-test_mapping.py) — this is what let me verify the logic correctly here,
-without network access to QuickBooks.
+QuickBooks' real field names, confirmed against Intuit's published
+Bill/PurchaseOrder schema.
 """
 
-import json
-import sys
-from datetime import date
 from decimal import Decimal
 
-from qbo_client import qbo_query
 
-
-# ---------------------------------------------------------------------------
-# MAPPING — pure functions, no network calls. QuickBooks' real field names,
-# confirmed against Intuit's published Bill/PurchaseOrder schema.
-# ---------------------------------------------------------------------------
 def map_po(raw: dict) -> dict:
     """
     One QuickBooks PurchaseOrder JSON object -> our flat PO shape.
@@ -77,33 +66,3 @@ def _first_item_line(lines: list) -> dict:
         if "SalesItemLineDetail" in line or "ItemBasedExpenseLineDetail" in line:
             return line
     raise ValueError("No item-based line found in this record's Line array.")
-
-
-# ---------------------------------------------------------------------------
-# FETCH + FREEZE — the only part that touches the network.
-# ---------------------------------------------------------------------------
-def fetch_and_freeze(output_path: str) -> None:
-    po_response = qbo_query("select * from PurchaseOrder")
-    bill_response = qbo_query("select * from Bill")
-
-    raw_pos = po_response.get("QueryResponse", {}).get("PurchaseOrder", [])
-    raw_bills = bill_response.get("QueryResponse", {}).get("Bill", [])
-
-    fixture = {
-        "fetched_date": date.today().isoformat(),
-        "purchase_orders": [map_po(p) for p in raw_pos],
-        "bills": [map_bill(b) for b in raw_bills],
-    }
-
-    with open(output_path, "w") as f:
-        json.dump(fixture, f, indent=2)
-
-    print(
-        f"Wrote {len(fixture['purchase_orders'])} POs and "
-        f"{len(fixture['bills'])} Bills to {output_path}"
-    )
-
-
-if __name__ == "__main__":
-    out = sys.argv[1] if len(sys.argv) > 1 else "fixture.json"
-    fetch_and_freeze(out)
