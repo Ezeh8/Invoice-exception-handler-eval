@@ -14,6 +14,8 @@ Locked decisions this file implements:
         is fuzzy vendor-name matching on the escalate path. On escalation,
         the case is written to the logger folder and processing continues —
         no blocking, no waiting on a human mid-run.
+        Updated 2026-10-23: vendor names are normalised before the LLM is
+        asked, and an "unsure" LLM answer escalates instead of rejecting.
 """
 
 from typing import Union
@@ -21,7 +23,11 @@ from typing import Union
 from .database import is_duplicate, mark_processed
 from .escalation_log import log_escalation
 from .models import Bill, MatchResult, PurchaseOrder, Verdict
-from .vendor_matching import llm_vendor_names_match
+from .vendor_matching import (
+    VendorMatchAnswer,
+    ask_llm_if_same_vendor,
+    names_match_after_normalising,
+)
 
 
 def match_bill_to_po(bill: Bill, purchase_orders: list[PurchaseOrder], db_conn) -> MatchResult:
@@ -76,18 +82,22 @@ def _find_candidate_po(bill: Bill, purchase_orders: list[PurchaseOrder]) -> Unio
 
 
 def _find_po_by_fuzzy_vendor(bill: Bill, purchase_orders: list[PurchaseOrder]) -> Union[PurchaseOrder, MatchResult]:
-    """No exact vendor match — ask the LLM whether a same-item PO's vendor
-    is plausibly the same company (D3)."""
+    """No exact vendor match — look for a same-item PO whose vendor is
+    plausibly the same company: by normalised name first, then the LLM (D3)."""
     same_item_pos = [p for p in purchase_orders if p.item_name == bill.item_name]
 
     for po in same_item_pos:
+        if names_match_after_normalising(po.vendor_name, bill.vendor_name):
+            return po
+
+    return _ask_llm_about_same_item_pos(bill, same_item_pos)
+
+
+def _ask_llm_about_same_item_pos(bill: Bill, same_item_pos: list[PurchaseOrder]) -> Union[PurchaseOrder, MatchResult]:
+    unsure_po = None
+    for po in same_item_pos:
         try:
-            if llm_vendor_names_match(po.vendor_name, bill.vendor_name):
-                log_escalation(
-                    bill, po,
-                    reason=f"Fuzzy vendor match accepted by LLM: '{po.vendor_name}' ~ '{bill.vendor_name}'",
-                )
-                return po
+            answer = ask_llm_if_same_vendor(po.vendor_name, bill.vendor_name)
         except Exception as exc:
             # Ollama down, timeout, missing Haiku key, malformed response —
             # whatever the failure, escalate honestly instead of crashing
@@ -98,6 +108,30 @@ def _find_po_by_fuzzy_vendor(bill: Bill, purchase_orders: list[PurchaseOrder]) -
                 reason=f"Vendor name '{bill.vendor_name}' has no exact PO match; LLM check failed: {exc}",
                 bill_id=bill.bill_id,
             )
+
+        if answer == VendorMatchAnswer.YES:
+            log_escalation(
+                bill, po,
+                reason=f"Fuzzy vendor match accepted by LLM: '{po.vendor_name}' ~ '{bill.vendor_name}'",
+            )
+            return po
+        if answer == VendorMatchAnswer.UNSURE and unsure_po is None:
+            unsure_po = po
+
+    # A wrong accept or a wrong reject both cost money; a human checking
+    # one borderline name is cheap — so "unsure" escalates instead of guessing.
+    if unsure_po is not None:
+        reason = (
+            f"LLM was unsure whether '{bill.vendor_name}' and PO vendor "
+            f"'{unsure_po.vendor_name}' are the same company."
+        )
+        log_escalation(bill, unsure_po, reason=reason)
+        return MatchResult(
+            verdict=Verdict.ESCALATE,
+            reason=reason,
+            po_id=unsure_po.po_id,
+            bill_id=bill.bill_id,
+        )
 
     return _reject_unmatched(bill, had_same_item_candidate=bool(same_item_pos))
 

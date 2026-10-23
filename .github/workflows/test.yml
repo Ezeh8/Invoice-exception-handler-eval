@@ -56,8 +56,8 @@ jobs:
           python3 -c "import json; json.load(open('fixtures/golden_dataset.json')); print('golden_dataset.json OK')"
           python3 -c "import json; json.load(open('fixtures/regression_100.json')); print('regression_100.json OK')"
 
-      - name: Run QuickBooks mapping tests
-        run: pytest tests/test_quickbooks_mapping.py -v
+      - name: Run offline unit tests (QuickBooks mapping, vendor matching)
+        run: pytest tests/test_quickbooks_mapping.py tests/test_vendor_matching.py -v
 
       - name: Create processed_bills table
         run: |

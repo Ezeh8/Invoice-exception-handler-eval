@@ -14,10 +14,10 @@ import time
 
 from invoice_exception_handler.fixture_loading import REGRESSION_100_PATH, load_fixture
 from invoice_exception_handler.vendor_matching import (
-    answer_is_yes,
     ask_haiku,
     ask_ollama,
     build_vendor_match_prompt,
+    parse_vendor_answer,
 )
 
 HAIKU_INPUT_RATE = 1.00 / 1_000_000   # $ per input token, Haiku 4.5, confirmed July 2026
@@ -52,7 +52,7 @@ def compare_pair(po_vendor: str, bill_vendor: str) -> dict:
 
     start = time.time()
     try:
-        row["ollama_answer"] = "yes" if answer_is_yes(ask_ollama(prompt)) else "no"
+        row["ollama_answer"] = parse_vendor_answer(ask_ollama(prompt)).value
     except Exception as exc:
         row["ollama_answer"] = f"ERROR: {exc}"
     row["ollama_latency_s"] = round(time.time() - start, 2)
@@ -61,7 +61,7 @@ def compare_pair(po_vendor: str, bill_vendor: str) -> dict:
     start = time.time()
     try:
         resp = ask_haiku(prompt)
-        row["haiku_answer"] = "yes" if answer_is_yes(resp.content[0].text) else "no"
+        row["haiku_answer"] = parse_vendor_answer(resp.content[0].text).value
         row["haiku_latency_s"] = round(time.time() - start, 2)
         in_tok = resp.usage.input_tokens
         out_tok = resp.usage.output_tokens
