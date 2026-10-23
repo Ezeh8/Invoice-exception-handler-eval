@@ -1,11 +1,11 @@
 """
-test_agent_100.py — scaled regression suite: runs all 100 fixture cases
-through agent.py and asserts each one against its expected_verdict.
+Scaled regression suite — runs all 100 fixture cases through the matching
+logic and asserts each one against its expected_verdict.
 
-Run with: pytest test_agent_100.py -v
+Run with: pytest tests/test_regression_100.py -v
 
 Processes bills in FILE ORDER (not shuffled) — this matters because the
-4 duplicate cases are placed after their originals in fixture_100.json,
+4 duplicate cases are placed after their originals in regression_100.json,
 and duplicate detection depends on that order (same principle as D6 in
 the original 6-case suite, now scaled).
 
@@ -13,29 +13,25 @@ The fuzzy_vendor_match cases (6 of them) make REAL Haiku API calls —
 real cost, real network dependency, not mocked.
 """
 
-import json
-
 import pytest
 
-from agent import Bill, PurchaseOrder, Verdict, get_db_connection, log_run_start, match_bill_to_po
+from invoice_exception_handler.database import get_db_connection, reset_processed_bills
+from invoice_exception_handler.escalation_log import log_run_start
+from invoice_exception_handler.fixture_loading import (
+    REGRESSION_100_PATH,
+    bill_from,
+    load_fixture,
+    purchase_orders_from,
+)
+from invoice_exception_handler.matching import match_bill_to_po
+from invoice_exception_handler.models import Verdict
 
-
-FIXTURE_PATH = "fixture_100.json"
-
-
-def load_fixture():
-    with open(FIXTURE_PATH) as f:
-        return json.load(f)
+FIXTURE_BILLS = load_fixture(REGRESSION_100_PATH)["bills"]
 
 
 @pytest.fixture(scope="module")
-def fixture_data():
-    return load_fixture()
-
-
-@pytest.fixture(scope="module")
-def purchase_orders(fixture_data):
-    return [PurchaseOrder(**po) for po in fixture_data["purchase_orders"]]
+def purchase_orders():
+    return purchase_orders_from(load_fixture(REGRESSION_100_PATH))
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -47,20 +43,13 @@ def clean_db_once():
     Module-scoped, unlike the 6-case suite's per-test reset.
 
     Also writes ONE run marker (log_run_start) so send_escalation_report.py
-    can correctly find this run's escalations — previously only
-    run_fixture_test.py wrote this marker, which is why the reporting
-    script could miss pytest-generated escalations entirely.
+    can correctly find this run's escalations.
     """
     log_run_start()
     db_conn = get_db_connection()
-    with db_conn.cursor() as cur:
-        cur.execute("TRUNCATE TABLE processed_bills")
-    db_conn.commit()
+    reset_processed_bills(db_conn)
     yield db_conn
     db_conn.close()
-
-
-VERDICT_MAP = {"accept": Verdict.ACCEPT, "escalate": Verdict.ESCALATE, "reject": Verdict.REJECT}
 
 
 def _bill_test_id(bill_data):
@@ -69,14 +58,13 @@ def _bill_test_id(bill_data):
 
 @pytest.mark.parametrize(
     "bill_data",
-    load_fixture()["bills"],
-    ids=[_bill_test_id(b) for b in load_fixture()["bills"]],
+    FIXTURE_BILLS,
+    ids=[_bill_test_id(b) for b in FIXTURE_BILLS],
 )
 def test_bill_matches_expected_verdict(bill_data, purchase_orders, clean_db_once):
-    raw = {k: v for k, v in bill_data.items() if k not in ("_case", "expected_verdict", "case_type")}
-    bill = Bill(**raw)
+    bill = bill_from(bill_data)
     result = match_bill_to_po(bill, purchase_orders, clean_db_once)
-    expected = VERDICT_MAP[bill_data["expected_verdict"]]
+    expected = Verdict(bill_data["expected_verdict"])
     assert result.verdict == expected, (
         f"{bill_data['bill_id']} ({bill_data['case_type']}): "
         f"expected {expected.value}, got {result.verdict.value} — {result.reason}"
