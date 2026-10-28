@@ -1,8 +1,8 @@
 """
-test_agent.py — real pass/fail regression tests for agent.py's matching
-logic, using the 6-case (7-record) hand-written fixture.
+Golden dataset — real pass/fail regression tests for the matching logic,
+using the 6-case (7-record) hand-written fixture.
 
-Run with: pytest test_agent.py -v
+Run with: pytest tests/test_golden_dataset.py -v
 
 Note: the fuzzy-vendor-match test makes a REAL Haiku API call each run —
 small cost, real network dependency, not mocked. This is deliberate: it
@@ -14,14 +14,18 @@ having already run, per D6. Splitting them would misrepresent how the
 system actually behaves, so they're asserted together in one test.
 """
 
-import json
-
 import pytest
 
-from agent import Bill, PurchaseOrder, Verdict, get_db_connection, log_run_start, match_bill_to_po
-
-
-FIXTURE_PATH = "demofixture1.json"
+from invoice_exception_handler.database import get_db_connection, reset_processed_bills
+from invoice_exception_handler.escalation_log import log_run_start
+from invoice_exception_handler.fixture_loading import (
+    GOLDEN_DATASET_PATH,
+    bill_from,
+    load_fixture,
+    purchase_orders_from,
+)
+from invoice_exception_handler.matching import match_bill_to_po
+from invoice_exception_handler.models import Bill, Verdict
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -30,21 +34,19 @@ def mark_test_session():
     Writes ONE '=== NEW RUN STARTED ===' marker at the start of the whole
     pytest session — not per test. Without this, send_escalation_report.py
     (which looks for the last marker to find "the current run") would
-    miss every escalation this suite writes, since previously only
-    run_fixture_test.py called log_run_start().
+    miss every escalation this suite writes.
     """
     log_run_start()
 
 
 @pytest.fixture
 def fixture_data():
-    with open(FIXTURE_PATH) as f:
-        return json.load(f)
+    return load_fixture(GOLDEN_DATASET_PATH)
 
 
 @pytest.fixture
 def purchase_orders(fixture_data):
-    return [PurchaseOrder(**po) for po in fixture_data["purchase_orders"]]
+    return purchase_orders_from(fixture_data)
 
 
 @pytest.fixture(autouse=True)
@@ -55,17 +57,14 @@ def clean_db():
     automatically (autouse) — no need to reference it explicitly.
     """
     db_conn = get_db_connection()
-    with db_conn.cursor() as cur:
-        cur.execute("TRUNCATE TABLE processed_bills")
-    db_conn.commit()
+    reset_processed_bills(db_conn)
     yield db_conn
     db_conn.close()
 
 
 def _find_bill(fixture_data, bill_id: str) -> Bill:
     raw = next(b for b in fixture_data["bills"] if b["bill_id"] == bill_id)
-    raw = {k: v for k, v in raw.items() if k != "_case"}
-    return Bill(**raw)
+    return bill_from(raw)
 
 
 def test_clean_accept(fixture_data, purchase_orders, clean_db):

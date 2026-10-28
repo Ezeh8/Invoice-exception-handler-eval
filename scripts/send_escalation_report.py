@@ -7,32 +7,28 @@ Requires in .env:
   SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
   GOOGLE_SHEET_ID=<the long ID from the Sheet's URL>
 
-Requires google_credentials.json (service account key) in this folder.
+Requires google_credentials.json (service account key) in the project root.
 
-Run with: python3 send_escalation_report.py
+Run from the project root: python3 -m scripts.send_escalation_report
 """
 
-import glob
 import json
 import os
 
 import gspread
 import requests
-from dotenv import load_dotenv
 from google.oauth2.service_account import Credentials
 
-load_dotenv()
+from invoice_exception_handler.paths import ESCALATION_LOG_DIR
 
 SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
 GOOGLE_SHEET_ID = os.environ.get("GOOGLE_SHEET_ID")
 CREDS_FILE = "google_credentials.json"
-
-
 STATE_FILE = ".last_sent_run_marker"
 
 
 def get_latest_run_entries():
-    log_files = sorted(glob.glob("escalation_log/*.jsonl"))
+    log_files = sorted(ESCALATION_LOG_DIR.glob("*.jsonl"))
     if not log_files:
         raise RuntimeError("No escalation log files found. Run the test suite first.")
 
@@ -73,7 +69,7 @@ def write_to_sheet(entries):
     if not GOOGLE_SHEET_ID:
         raise RuntimeError("GOOGLE_SHEET_ID is not set in .env")
     if not os.path.exists(CREDS_FILE):
-        raise RuntimeError(f"{CREDS_FILE} not found in this folder")
+        raise RuntimeError(f"{CREDS_FILE} not found in the project root")
 
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
     creds = Credentials.from_service_account_file(CREDS_FILE, scopes=scopes)

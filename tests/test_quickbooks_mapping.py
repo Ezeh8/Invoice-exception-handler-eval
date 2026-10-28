@@ -7,10 +7,10 @@ sample PurchaseOrder response) — not invented structures.
 This is what let me confirm the mapping logic is correct WITHOUT a live
 QuickBooks connection, which this sandbox environment can't reach.
 
-Run with: pytest test_mapping.py -v
+Run with: pytest tests/test_quickbooks_mapping.py -v
 """
 
-from fetch_cases import map_po, map_bill
+from invoice_exception_handler.quickbooks.mapping import map_bill, map_po
 
 # Shaped from a real, documented PurchaseOrder API response.
 SAMPLE_PO = {

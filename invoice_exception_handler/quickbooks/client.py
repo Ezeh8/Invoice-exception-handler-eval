@@ -1,6 +1,6 @@
 """
 QuickBooks Online API client — authentication + raw HTTP calls only.
-No business logic lives here. That's agent.py's job.
+No business logic lives here. That's matching.py's job.
 
 Setup (one time):
   1. In your Intuit app dashboard, get: Client ID, Client Secret, Realm ID
@@ -9,14 +9,14 @@ Setup (one time):
   2. Run the OAuth Playground (developer.intuit.com -> your app -> OAuth
      Playground tab) to get a Refresh Token. This is the easiest path —
      it does the browser login dance for you and hands you a token.
-  3. Put all four values in a .env file next to this script:
+  3. Put all four values in the project's .env file (at the repo root):
 
      QBO_CLIENT_ID=...
      QBO_CLIENT_SECRET=...
      QBO_REALM_ID=9341457582663343
      QBO_REFRESH_TOKEN=...
 
-  4. pip install requests python-dotenv --break-system-packages
+  4. pip install -r requirements.txt
 """
 
 import os
